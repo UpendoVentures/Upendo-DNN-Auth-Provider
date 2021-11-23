@@ -1,0 +1,17 @@
+
+using System;
+
+namespace Upendo.Modules.UpendoDnnAuthenticationProvider.Entities
+{
+    public interface IExampleInfo
+    {
+        int ItemId { get; set; }
+        int ModuleId { get; set; }
+        string Title { get; set; }
+        string Description { get; set; }
+        int CreatedByUserId { get; set; }
+        DateTime CreatedByDate { get; set; }
+        int LastUpdatedByUserId { get; set; }
+        DateTime LastUpdatedByDate { get; set; }
+    }
+}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="Upendo.Modules.UpendoDnnAuthenticationProvider" type="Module" version="01.00.00">
+    <package name="Upendo.Modules.UpendoDnnAuthenticationProvider" type="Auth_System" version="01.00.00">
       <friendlyName>UpendoDnnAuthenticationProvider</friendlyName>
       <description>
         <![CDATA[<p>This is a barebones authentication provider that simply wraps the core DNN authentication provider. </p>]]>
@@ -20,79 +20,16 @@
         <dependency type="CoreVersion">09.04.04</dependency>
       </dependencies>
       <components>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\UpendoDnnAuthenticationProvider</basePath>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-            <script type="UnInstall">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>Uninstall.SqlDataProvider</name>
-              <version>01.00.00</version>
-            </script>
-          </scripts>
+        
+        <component type="AuthenticationSystem">
+          <authenticationService>
+            <type>UpendoDnn</type>
+            <settingsControlSrc>DesktopModules/UpendoDnnAuthenticationProvider/Settings.ascx</settingsControlSrc>
+            <loginControlSrc>DesktopModules/UpendoDnnAuthenticationProvider/Login.ascx</loginControlSrc>
+            <logoffControlSrc>DesktopModules/UpendoDnnAuthenticationProvider/Logoff.ascx</logoffControlSrc>
+          </authenticationService>
         </component>
-
-        <component type="Module">
-          <desktopModule>
-            <moduleName>UpendoDnnAuthenticationProvider</moduleName>
-            <foldername>UpendoDnnAuthenticationProvider</foldername>
-            <businessControllerClass>Upendo.Modules.UpendoDnnAuthenticationProvider.Components.FeatureController, Upendo.Modules.UpendoDnnAuthenticationProvider</businessControllerClass>
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>UpendoDnnAuthenticationProvider</friendlyName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/UpendoDnnAuthenticationProvider/View.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Edit</controlKey>
-                    <controlSrc>DesktopModules/UpendoDnnAuthenticationProvider/Edit.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Edit UpendoDnnAuthenticationProvider Content</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                    <supportsPopUps>True</supportsPopUps>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/UpendoDnnAuthenticationProvider/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>UpendoDnnAuthenticationProvider Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-          <eventMessage>
-            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
-            <processorCommand>UpgradeModule</processorCommand>
-            <attributes>
-              <businessControllerClass>Upendo.Modules.UpendoDnnAuthenticationProvider.Components.FeatureController, Upendo.Modules.UpendoDnnAuthenticationProvider</businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.00</upgradeVersionsList>
-            </attributes>
-          </eventMessage>
-        </component>
-
+        
         <component type="Assembly">
           <assemblies>
             <assembly>

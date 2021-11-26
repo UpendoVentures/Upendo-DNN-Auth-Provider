@@ -1,62 +1,41 @@
-
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.Localization;
-using DotNetNuke.Security;
-using System;
-using Upendo.Modules.UpendoDnnAuthenticationProvider.Components;
-
 namespace Upendo.Modules.UpendoDnnAuthenticationProvider
 {
-    public partial class Settings : UpendoDnnAuthenticationProviderModuleSettingsBase
-    {
-        #region Base Method Implementations
+    using System;
 
-        /// <summary>
-        /// LoadSettings loads the settings from the Database and displays them
-        /// </summary>
-        public override void LoadSettings()
+    using DotNetNuke.Services.Authentication;
+    using DotNetNuke.Services.Exceptions;
+    using Upendo.Modules.UpendoDnnAuthenticationProvider.Components;
+
+    public partial class Settings : AuthenticationSettingsBase
+    {
+        protected string AuthSystemApplicationName
         {
-            try
-            {
-				/* EXAMPLE 
-                var setting = Settings["SettingName"];
-				if (setting != null)
-				{
-					txtTextBox.Text = setting.ToString();
-				}
-				*/
-            }
-            catch (Exception exc) // module failed to load
-            {
-                Exceptions.ProcessModuleLoadException(this, exc);
-            }
+            get { return "UpendoDnn"; }
         }
 
-        /// <summary>
-        /// UpdateSettings saves the modified settings to the Database
-        /// </summary>
         public override void UpdateSettings()
         {
+            if (this.SettingsEditor.IsValid && this.SettingsEditor.IsDirty)
+            {
+                var config = (AuthenticationConfig)this.SettingsEditor.DataSource;
+                AuthenticationConfig.UpdateConfig(config);
+            }
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
             try
             {
-				var ctlModule = new ModuleController();
-                var security = new PortalSecurity();
-				
-				/* EXAMPLE
-				ctlModule.UpdateTabModuleSetting(TabModuleId, ¨SettingName¨, security.InputFilter(txtTextbox.Text.Trim(), PortalSecurity.FilterFlag.NoMarkup));
-				ctlModule.UpdateModuleSetting(ModuleId, ¨SettingName¨, security.InputFilter(txtTextbox.Text.Trim(), PortalSecurity.FilterFlag.NoMarkup));
-				*/
-                
-				// synchronize the module settings
-                ModuleController.SynchronizeModule(ModuleId);
+                AuthConfigBase config = AuthConfigBase.GetConfig(AuthSystemApplicationName, this.PortalId);
+                this.SettingsEditor.DataSource = config;
+                this.SettingsEditor.DataBind();
             }
-            catch (Exception exc) //Module failed to load
+            catch (Exception exc)
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-
-        #endregion
     }
 }

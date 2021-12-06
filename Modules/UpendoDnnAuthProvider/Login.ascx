@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="Upendo.Modules.UpendoDnnAuthenticationProvider.Login" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls.Internal" Assembly="DotNetNuke.Web" %>
-<h1>Upendo Login</h1>
+<h3>Upendo Login</h3>
 <div class="dnnForm dnnLoginService dnnClear">
     <div class="dnnFormItem">
 		<div class="dnnLabel">

@@ -17,8 +17,8 @@ namespace Upendo.Modules.UpendoDnnAuthenticationProvider
         {
             if (this.SettingsEditor.IsValid && this.SettingsEditor.IsDirty)
             {
-                var config = (AuthenticationConfig)this.SettingsEditor.DataSource;
-                AuthenticationConfig.UpdateConfig(config);
+                var config = (AuthConfigBase)SettingsEditor.DataSource;
+                AuthConfigBase.UpdateConfig(config);
             }
         }
 

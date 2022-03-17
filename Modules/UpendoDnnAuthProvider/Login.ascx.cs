@@ -14,7 +14,6 @@
     using DotNetNuke.Services.Localization;
     using DotNetNuke.UI.Skins.Controls;
     using Microsoft.Extensions.DependencyInjection;
-    using Upendo.Modules.UpendoDnnAuthenticationProvider.Components;
 
     using Globals = DotNetNuke.Common.Globals;
     using Host = DotNetNuke.Entities.Host.Host;
@@ -295,7 +294,7 @@
 
                 if (!emailUsedAsUsername || userByEmail != null)
                 {
-                    objUser = UserController.ValidateUser(this.PortalId, userName, this.txtPassword.Text, Const.AUTH_SYSTEM_TYPE, string.Empty, this.PortalSettings.PortalName, this.IPAddress, ref loginStatus);
+                    objUser = UserController.ValidateUser(this.PortalId, userName, this.txtPassword.Text, "DNN", string.Empty, this.PortalSettings.PortalName, this.IPAddress, ref loginStatus);
                 }
 
                 var authenticated = Null.NullBoolean;
@@ -310,7 +309,7 @@
                 }
 
                 // Raise UserAuthenticated Event
-                var eventArgs = new UserAuthenticatedEventArgs(objUser, userName, loginStatus, Const.AUTH_SYSTEM_TYPE)
+                var eventArgs = new UserAuthenticatedEventArgs(objUser, userName, loginStatus, "DNN")
                 {
                     Authenticated = authenticated,
                     Message = message,

@@ -10,7 +10,7 @@ namespace Upendo.Modules.UpendoDnnAuthenticationProvider
     {
         protected string AuthSystemApplicationName
         {
-            get { return Const.AUTH_SYSTEM_TYPE; }
+            get { return "UpendoDnn"; }
         }
 
         public override void UpdateSettings()

@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="Upendo.Modules.UpendoDnnAuthenticationProvider.Login" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls"%>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls.Internal" Assembly="DotNetNuke.Web" %>
-<h3>Upendo Login</h3>
 <div class="dnnForm dnnLoginService dnnClear">
     <div class="dnnFormItem">
 		<div class="dnnLabel">
@@ -45,7 +44,7 @@
         /*globals jQuery, window, Sys */
         (function ($, Sys) {
             const disabledActionClass = "dnnDisabledAction";
-            const actionLinks = $('a[id^="dnn_ctr<%=ModuleId > Null.NullInteger ? ModuleId.ToString() : ""%>_Login_Login_DNN"]');
+            const actionLinks = $('a[id^="dnn_ctr<%=ModuleId > Null.NullInteger ? ModuleId.ToString() : ""%>_Login_UpendoDnn_Login_UpendoDnn"]');
             function isActionDisabled($el) {
                 return $el && $el.hasClass(disabledActionClass);
             }
@@ -76,8 +75,8 @@
 		
             $(document).ready(function () {
                 $(document).on('keydown', '.dnnLoginService', function (e) {
-                    if ($(e.target).is('input:text,input:password') && e.keyCode === 13) {
-                        var $loginButton = $('#dnn_ctr<%=ModuleId > Null.NullInteger ? ModuleId.ToString() : ""%>_Login_Login_DNN_cmdLogin');
+                    if ($(e.target).is('input:text,input:password,input:checkbox') && e.keyCode === 13) {
+                        var $loginButton = $('#dnn_ctr<%=ModuleId > Null.NullInteger ? ModuleId.ToString() : ""%>_Login_UpendoDnn_Login_UpendoDnn_cmdLogin');
                         if (isActionDisabled($loginButton)) {
                             return false;
                         }
